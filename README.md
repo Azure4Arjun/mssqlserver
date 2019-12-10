@@ -1,4 +1,4 @@
-## Welcome ## - Collection of my frequently used scripts and useful links.  
+## Welcome ## - DBA Scripts and Links.  
 
 sqlcollaborative : [DBATools](https://dbatools.io/)
 
