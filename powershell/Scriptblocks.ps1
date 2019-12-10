@@ -1,0 +1,2 @@
+#Powershell version
+$PSVersionTable.PSVersion
