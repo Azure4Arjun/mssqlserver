@@ -1,27 +1,24 @@
-
 /*
 
 Script to export all database user permissons.
 
 */
-
-
 USE MASTER
 GO
- 
+
 SET NOCOUNT ON
- 
+
 DECLARE @DestDatabase VARCHAR(max)
- 
+
 SET @DestDatabase = 'Test' --DBname
- 
+
 IF EXISTS (
-        SELECT *
-        FROM SYSDATABASES
-        WHERE name = @DestDatabase
-        )
-    EXEC (
-            'USE ' + @DestDatabase + ';
+		SELECT *
+		FROM SYSDATABASES
+		WHERE name = @DestDatabase
+		)
+	EXEC (
+			'USE ' + @DestDatabase + ';
  
 DECLARE @temp table(Extract Varchar(MAX))
  
@@ -41,7 +38,7 @@ AND dp.name NOT IN (''dbo'')
  
 INSERT INTO @temp (Extract) 
 SELECT ''EXEC( ''''USE ' + @DestDatabase + 
-            '; IF NOT EXISTS
+			'; IF NOT EXISTS
  (SELECT * FROM sys.database_principals WHERE name = N'''''''''' + dp.name + '''''''''')
   CREATE USER ['' + dp.name + ''] WITHOUT LOGIN '''');  ''
 FROM sys.database_principals dp left 
@@ -54,7 +51,7 @@ FROM sys.sysmembers WHERE User_Name([memberuid]) NOT IN (''dbo'')
  
 INSERT INTO @temp (Extract) 
 SELECT ''EXEC( ''''USE ' + @DestDatabase + 
-            '; ''
+			'; ''
  + CASE [a].[state_desc] WHEN ''GRANT_WITH_GRANT_OPTION'' THEN ''GRANT '' ELSE [a].[state_desc]  END
  + '' '' 
  + [a].[permission_name] + CASE class WHEN 1 THEN '' ON ['' 
@@ -73,9 +70,7 @@ FROM sys.database_permissions a
 SELECT Extract AS [Extract] FROM @temp
 GO
 '
-            )
+			)
 ELSE
-    SELECT '--NO'
+	SELECT '--NO'
 GO
- 
- 
