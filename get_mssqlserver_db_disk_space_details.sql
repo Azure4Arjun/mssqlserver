@@ -14,8 +14,8 @@ AS (
 		,type_desc
 		,dovs.logical_volume_name AS LogicalName
 		,dovs.volume_mount_point AS Drive
-		,(CONVERT(INT, dovs.total_bytes / 1048576.0) / 1024) AS AvilableSpaceInGB
-		,(CONVERT(INT, dovs.available_bytes / 1048576.0) / 1024) AS FreeSpaceInGB
+		,(CONVERT(INT, dovs.total_bytes / 1048576.0) / 1024) AS Drive_Size_InGB
+		,(CONVERT(INT, dovs.available_bytes / 1048576.0) / 1024) AS Drive_Free_Space_Available_InGB
 		,CAST((CONVERT(FLOAT, dovs.available_bytes / 1048576.0) / 1024) / (CONVERT(FLOAT, dovs.total_bytes / 1048576.0) / 1024) * 100 AS DECIMAL(10, 2)) AS [%_Free]
 		,cast(((((CONVERT(INT, dovs.total_bytes / 1048576.0) / 1024) * @p1) - (CONVERT(INT, dovs.available_bytes / 1048576.0) / 1024)) / @p2) AS DECIMAL(10, 2)) [target_%_add_gb]
 	FROM sys.master_files mf
