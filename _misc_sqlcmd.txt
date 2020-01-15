@@ -68,3 +68,12 @@ SELECT SERVERPROPERTY('MachineName') MachineName
 WHERE SERVERPROPERTY('MachineName') =''
 ------------------------------------------------------------------------
 exec xp_cmdshell 'powershell -command "([adsi]''WinNT://Domain/#USERNAME#,user'').ChangePassword(''oldpassword'',''newpassword'')"'
+
+
+-----------------------
+
+	,CASE 
+		WHEN patindex(@Pattern_1 COLLATE Latin1_General_BIN, CAST([Description] AS VARCHAR(max))) > 0
+			THEN CAST(Stuff(REPLACE(REPLACE(REPLACE(REPLACE(cast([Description] as nvarchar(max)), CHAR(13), ' '), CHAR(10), ' '),'|~',''),'^^'+CHAR(13)+CHAR(10),' '), PatIndex(@Pattern_1, REPLACE(REPLACE(REPLACE(REPLACE(cast([Description] as nvarchar(max)), CHAR(13), ' '), CHAR(10), ' '),'|~',''),'^^'+CHAR(13)+CHAR(10),' ')	), 0, '') AS varchar(max))
+		ELSE CAST(REPLACE(REPLACE(REPLACE(REPLACE(cast([Description] as nvarchar(max)), CHAR(13), ' '), CHAR(10), ' '),'|~',''),'^^'+CHAR(13)+CHAR(10),' ')	AS varchar(max))
+		END [Description]
