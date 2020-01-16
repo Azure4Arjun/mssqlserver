@@ -1,14 +1,14 @@
 Error: 9002, Severity: 17, State: 4. 
 The transaction log for database 'tempdb' is full due to 'ACTIVE_TRANSACTION'
 
-# 1 : log reuse desc
+###### 1 : log reuse desc
 
 ```sql
 SELECT log_reuse_wait, log_reuse_wait_desc
 FROM master.sys.databases
 WHERE name = N'tempdb';
 ```
-# 2 :TempDB transaction details : 
+###### 2 :TempDB transaction details : 
 ```sql
 SELECT DISTINCT s.session_id
        , a.transaction_id
@@ -83,7 +83,7 @@ WHERE s.session_id is Not Null
 ORDER BY a.transaction_begin_time, s.session_id
 OPTION (RECOMPILE);
 ```
-# 3 :TempDB minimal transaction details : 
+###### 3 :TempDB minimal transaction details : 
 ```sql
 SELECT s.session_id, dt.database_transaction_begin_time
 FROM sys.dm_tran_session_transactions s
@@ -92,7 +92,7 @@ INNER JOIN sys.dm_tran_database_transactions dt
 WHERE dt.database_id = 2 and database_transaction_log_record_count > 0
 OPTION (RECOMPILE);
 ```
-# 4 : Blocking check
+###### 4 : Blocking check
 ```sql
 ;WITH DS AS (
 SELECT c.session_id
@@ -154,7 +154,7 @@ ORDER BY Blk_Id DESC, s1.session_id
 OPTION (RECOMPILE);
 ```
 
-# 5 : Loginfo - Status 2 in use | Status 0 not in use
+###### 5 : Loginfo - Status 2 in use | Status 0 not in use
 ```sql
 DBCC LOGINFO ('Tempdb');
 ```
