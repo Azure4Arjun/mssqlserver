@@ -18,9 +18,11 @@ AS (
 		,DATEDIFF(hour,bs.backup_finish_date,getdate()) Time_since
 		,CAST(bs.backup_size / 1024 / 1024 / 1024 AS DECIMAL(10, 4)) backup_size_GB
 		,CAST(bs.compressed_backup_size / 1024 / 1024 / 1024 AS DECIMAL(10, 4)) compressed_backup_size_GB
+		,bmf.physical_device_name
 	FROM master.sys.databases db
 	LEFT OUTER JOIN backupset bss ON bss.database_name = db.name
 	LEFT OUTER JOIN msdb.dbo.backupset bs ON bs.database_name = db.name
+	INNER JOIN msdb.dbo.backupmediafamily bmf ON bmf.media_set_id = bs.media_set_id
 		AND bss.bstype = bs.type
 		AND bss.MAXbackup_finish_date = bs.backup_finish_date
 	)
