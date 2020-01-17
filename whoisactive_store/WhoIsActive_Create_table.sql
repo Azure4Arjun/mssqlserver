@@ -11,7 +11,7 @@ EXEC master.dbo.sp_WhoIsActive @get_outer_command = 1
 	   ,@return_schema = 1,
     @schema = @s OUTPUT
 
-SELECT @s
+SELECT @s;
 
 CREATE TABLE WhoIsActive (
 	[dd hh:mm:ss.mss] VARCHAR(8000) NULL
