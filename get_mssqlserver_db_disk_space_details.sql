@@ -30,8 +30,7 @@ AS (
 		--AND dovs.volume_mount_point=''
 	)
 SELECT *
-	,FreeSpaceInGB + [target_%_add_gb] Total_Target_gb
+	,Drive_Free_Space_Available_InGB + [target_%_add_gb] Total_Target_gb
 FROM D
-ORDER BY FreeSpaceInGB ASC
+ORDER BY Drive_Free_Space_Available_InGB ASC
 GO
-
