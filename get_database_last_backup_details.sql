@@ -15,6 +15,7 @@ AS (
 		,bs.type
 		,bs.name AS BackupSetName
 		,bs.backup_finish_date
+		,DATEDIFF(hour,bs.backup_finish_date,getdate()) Time_since
 		,CAST(bs.backup_size / 1024 / 1024 / 1024 AS DECIMAL(10, 4)) backup_size_GB
 		,CAST(bs.compressed_backup_size / 1024 / 1024 / 1024 AS DECIMAL(10, 4)) compressed_backup_size_GB
 	FROM master.sys.databases db
