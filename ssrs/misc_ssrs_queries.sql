@@ -335,12 +335,11 @@ SELECT CAT.Name
 	,ROL.Description
 	,U.AuthType
 FROM dbo.Users U
-INNER JOIN dbo.PolicyUserRole PUR
-	ON U.UserID = PUR.UserID
-INNER JOIN dbo.Policies POLICY
-	ON POLICY.PolicyID = PUR.PolicyID
-INNER JOIN dbo.Roles ROL
-	ON ROL.RoleID = PUR.RoleID
-INNER JOIN dbo.CATALOG CAT
-	ON CAT.PolicyID = POLICY.PolicyID
+INNER JOIN dbo.PolicyUserRole PUR ON U.UserID = PUR.UserID
+INNER JOIN dbo.Policies POLICY ON POLICY.PolicyID = PUR.PolicyID
+INNER JOIN dbo.Roles ROL ON ROL.RoleID = PUR.RoleID
+INNER JOIN dbo.CATALOG CAT ON CAT.PolicyID = POLICY.PolicyID
+WHERE [PolicyRoot] = 1 -- 0 Inherit security & 1 Not Inherit security
+	AND u.UserName NOT LIKE '%'
 ORDER BY CAT.Name
+
