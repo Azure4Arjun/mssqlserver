@@ -1,0 +1,6 @@
+$source = ""
+$dest = ""
+
+$backupFile = (get-childitem $source | sort -Property LastWriteTime | select -Last 1)	#get most recent file in this directory
+
+$backupfile.copyto($dest,$true) #copy with overwrite
