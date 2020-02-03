@@ -10,6 +10,8 @@ Brent Ozar Unlimited : [sp_blitz*](https://github.com/BrentOzarULTD/SQL-Server-F
 
 Glenn Berry : [Dynamic Management Views](https://sqlserverperformance.wordpress.com/)
 
+Erik Darling  : [sp_pressure_detector](https://github.com/erikdarlingdata/DarlingData/tree/master/sp_pressure_detector)
+
 Paul Brewer : [sp_RestoreScriptGenie](https://paulbrewer.wordpress.com/sp_restoregene/)
 
 Daniel Janik : [How’s My Plan?](http://www.howsmyplan.com/)
