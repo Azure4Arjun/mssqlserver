@@ -119,3 +119,8 @@ Find-Module -Name "azurerm.storage" -Repository "PSGallery" | Save-Module -Path 
 
 ------------------------------------------------------------------------Replace#USERNAME#
 exec xp_cmdshell 'powershell -command "([adsi]''WinNT://Domain/#USERNAME#,user'').ChangePassword(''oldpassword'',''newpassword'')"'
+
+
+---------------
+
+VMWareToolBoxCMD stat balloon
