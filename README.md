@@ -40,6 +40,6 @@ CurrPorts : [CurrPorts](http://www.nirsoft.net/utils/cports.html#DownloadLinks)
 
 SQL Max Memory Calculator : [SqlMax](http://sqlmax.chuvash.eu/)
 
-MSSQL Credentials : (https://github.com/NetSPI/Powershell-Modules)
+MSSQL Credentials : [NetSPI_PS](https://github.com/NetSPI/Powershell-Modules)
 
 
