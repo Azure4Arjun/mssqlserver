@@ -1,28 +1,35 @@
-CREATE TABLE #Temp1(
-	[database_name] [nvarchar](128) NULL,
-	[LastFullBackup] [datetime] NULL,
-	[LastDifferential] [datetime] NULL,
-	[LastLog] [datetime] NULL,
-	[hr_since_full] [int] NULL,
-	[hr_since_diff] [int] NULL,
-	[min_since_log] [int] NULL
-);
+IF OBJECT_ID('#Temp1') IS NOT NULL
+	DROP TABLE #Temp1;
+
+IF OBJECT_ID('#Temp2') IS NOT NULL
+	DROP TABLE #Temp2;
+
+CREATE TABLE #Temp1 (
+	[database_name] [nvarchar](128) NULL
+	,[LastFullBackup] [datetime] NULL
+	,[LastDifferential] [datetime] NULL
+	,[LastLog] [datetime] NULL
+	,[hr_since_full] [int] NULL
+	,[hr_since_diff] [int] NULL
+	,[min_since_log] [int] NULL
+	);
+
 CREATE TABLE #Temp2 (
-	[AG] [nvarchar](60) NULL,
-	[name] [sysname] NULL,
-	[backup_state] [varchar](2) NOT NULL,
-	[LastFullBackup] [datetime] NULL,
-	[hr_since_full] [int] NULL,
-	[LastDifferential] [datetime] NULL,
-	[hr_since_diff] [int] NULL,
-	[LastLog] [datetime] NULL,
-	[min_since_log] [int] NULL,
-	[compatibility_level] [tinyint] NOT NULL,
-	[state_desc] [nvarchar](60) NULL,
-	[user_access_desc] [nvarchar](60) NULL,
-	[recovery_model_desc] [nvarchar](60) NULL,
-	[log_reuse_wait_desc] [nvarchar](60) NULL
-);
+	[AG] [nvarchar](60) NULL
+	,[name] [sysname] NULL
+	,[backup_state] [varchar](2) NOT NULL
+	,[LastFullBackup] [datetime] NULL
+	,[hr_since_full] [int] NULL
+	,[LastDifferential] [datetime] NULL
+	,[hr_since_diff] [int] NULL
+	,[LastLog] [datetime] NULL
+	,[min_since_log] [int] NULL
+	,[compatibility_level] [tinyint] NOT NULL
+	,[state_desc] [nvarchar](60) NULL
+	,[user_access_desc] [nvarchar](60) NULL
+	,[recovery_model_desc] [nvarchar](60) NULL
+	,[log_reuse_wait_desc] [nvarchar](60) NULL
+	);
 
 INSERT INTO #Temp1
 SELECT backupset.database_name
@@ -132,6 +139,3 @@ WHERE name != 'tempdb'
 	AND backup_state != 'OK'
 --AND AG ='PRIMARY'
 ORDER BY hr_since_full DESC
-
-DROP TABLE #Temp1
-DROP TABLE #Temp2
