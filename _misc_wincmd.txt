@@ -81,6 +81,9 @@ Get-WmiObject win32_service | select Name, DisplayName, State, PathName | Export
 
 fsutil fsinfo ntfsinfo d:\tempdb
 
+$wql = "SELECT Label, Blocksize, Name FROM Win32_Volume WHERE FileSystem='NTFS'"
+Get-WmiObject -Query $wql -ComputerName '.' | Select-Object Label, Blocksize, Name
+
 /* Filestream BP*/
 FSUTIL.EXE 8dot3name query F:
 FSUTIL.EXE 8dot3name set F: 1 
