@@ -7,7 +7,7 @@ AS (
 	GROUP BY bs.database_name
 		,bs.type
 	)
-	,Main
+	,main
 AS (
 	SELECT db.name
 		,db.state_desc
