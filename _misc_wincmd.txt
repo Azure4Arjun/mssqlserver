@@ -120,6 +120,8 @@ $wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 
 Find-Module -Name "azurerm.storage" -Repository "PSGallery" | Save-Module -Path "C:\temp\PSModules\" -Verbose
 
+$env:PSModulePath
+
 ------------------------------------------------------------------------Replace#USERNAME#
 exec xp_cmdshell 'powershell -command "([adsi]''WinNT://Domain/#USERNAME#,user'').ChangePassword(''oldpassword'',''newpassword'')"'
 
