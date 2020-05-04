@@ -20,6 +20,7 @@ AS (
 		DATEDIFF(hour, bs.backup_finish_date, getdate()) Time_since,
 		CAST(bs.backup_size / 1024 / 1024 / 1024 AS DECIMAL(10, 4)) backup_size_GB,
 		CAST(bs.compressed_backup_size / 1024 / 1024 / 1024 AS DECIMAL(10, 4)) compressed_backup_size_GB,
+		CAST(bs.backup_size/bs.compressed_backup_size as decimal(10,2)) [Compression_Ratio],
 		bmf.physical_device_name,
 		bss.user_name
 	FROM master.sys.databases db
@@ -39,6 +40,7 @@ SELECT @@servername [Server],
 	Time_since,
 	backup_size_GB,
 	compressed_backup_size_GB,
+	Compression_Ratio,
 	physical_device_name,
 	user_name
 FROM sys.databases sd
