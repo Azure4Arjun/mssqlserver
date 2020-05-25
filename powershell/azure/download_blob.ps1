@@ -11,7 +11,7 @@ $storage_context = New-AzureStorageContext -StorageAccountName $storage_account 
 $contaninerlist = Get-AzureStorageContainer -Context $storage_context -Verbose | where-object name -eq $containername| Select-Object name
 $contaninerlist | ForEach-Object {
   $containername = $_.Name
-  $filelist = Get-AzureStorageBlob -Context $storage_context -Container $containername -Blob "*.trn" | Where-Object LastModified -GT $BackupTime | Select-Object *
+  $filelist = Get-AzureStorageBlob -Context $storage_context -Container $containername -Blob "*.*" | Where-Object LastModified -GT $BackupTime | Select-Object *
   foreach ($file in $filelist)
   {
     if ($file.Name -ne $null)
