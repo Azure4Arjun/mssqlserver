@@ -193,8 +193,6 @@ DBCC procbuf [({'dbname' | dbid}[, {'objname' | objid}[, nbufs[, printopt = { 0 
 
 DBCC proccache
 
-//DBCC prtipage (dbid, objid, indexid [, [{{level, 0} | {filenum, pagenum}}] [,printopt]])
-
 DBCC pss [(uid[, spid[, printopt = { 1 | 0 }]] )]
 
 DBCC readpage ({ dbid, 'dbname' }, fileid, pageid
