@@ -1,3 +1,5 @@
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
 EXEC master.dbo.sp_WhoIsActive @get_outer_command = 1
        --,@get_plans = 1
        --,@get_full_inner_text = 1
