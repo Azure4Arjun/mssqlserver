@@ -8,6 +8,6 @@ SELECT sys.schemas.[name] AS SchemaName,
        CAST(CHECKSUM(CAST(OBJECT_DEFINITION(sys.objects.[object_id]) AS nvarchar(max)) COLLATE SQL_Latin1_General_CP1_CI_AS) AS bigint) AS [Checksum]
 FROM sys.objects
 INNER JOIN sys.schemas ON sys.objects.[schema_id] = sys.schemas.[schema_id]
-WHERE sys.schemas.[name] = 'az_dba'
+WHERE sys.schemas.[name] = 'sqldba'
 AND sys.objects.[name] IN('CommandExecute','DatabaseBackup','DatabaseIntegrityCheck','IndexOptimize')
 ORDER BY sys.schemas.[name] ASC, sys.objects.[name] ASC

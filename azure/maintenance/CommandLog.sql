@@ -2,14 +2,14 @@
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-IF NOT EXISTS (SELECT  schema_name FROM    information_schema.schemata WHERE   schema_name = 'az_dba' ) 
+IF NOT EXISTS (SELECT  schema_name FROM    information_schema.schemata WHERE   schema_name = 'sqldba' ) 
 BEGIN
-	EXEC dbo.sp_executesql @command= N'CREATE SCHEMA [az_dba]'
+	EXEC dbo.sp_executesql @command= N'CREATE SCHEMA [sqldba]'
 END
 GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[az_dba].[CommandLog]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[sqldba].[CommandLog]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [az_dba].[CommandLog](
+CREATE TABLE [sqldba].[CommandLog](
   [ID] [int] IDENTITY(1,1) NOT NULL,
   [DatabaseName] [sysname] NULL,
   [SchemaName] [sysname] NULL,

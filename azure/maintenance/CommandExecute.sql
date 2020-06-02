@@ -2,16 +2,16 @@
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-IF NOT EXISTS (SELECT  schema_name FROM    information_schema.schemata WHERE   schema_name = 'az_dba' ) 
+IF NOT EXISTS (SELECT  schema_name FROM    information_schema.schemata WHERE   schema_name = 'sqldba' ) 
 BEGIN
-	EXEC dbo.sp_executesql @command= N'CREATE SCHEMA [az_dba]'
+	EXEC dbo.sp_executesql @command= N'CREATE SCHEMA [sqldba]'
 END
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[az_dba].[CommandExecute]') AND type in (N'P', N'PC'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[sqldba].[CommandExecute]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [az_dba].[CommandExecute] AS'
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [sqldba].[CommandExecute] AS'
 END
 GO
-ALTER PROCEDURE [az_dba].[CommandExecute]
+ALTER PROCEDURE [sqldba].[CommandExecute]
 
 @DatabaseContext nvarchar(max),
 @Command nvarchar(max),
@@ -93,7 +93,7 @@ BEGIN
     SELECT 'QUOTED_IDENTIFIER has to be set to ON for the stored procedure.', 16, 1
   END
 
-  IF @LogToTable = 'Y' AND NOT EXISTS (SELECT * FROM sys.objects objects INNER JOIN sys.schemas schemas ON objects.[schema_id] = schemas.[schema_id] WHERE objects.[type] = 'U' AND schemas.[name] = 'az_dba' AND objects.[name] = 'CommandLog')
+  IF @LogToTable = 'Y' AND NOT EXISTS (SELECT * FROM sys.objects objects INNER JOIN sys.schemas schemas ON objects.[schema_id] = schemas.[schema_id] WHERE objects.[type] = 'U' AND schemas.[name] = 'sqldba' AND objects.[name] = 'CommandLog')
   BEGIN
     INSERT INTO @Errors ([Message], Severity, [State])
     SELECT 'The table CommandLog is missing. Download https://ola.hallengren.com/scripts/CommandLog.sql.', 16, 1
@@ -196,7 +196,7 @@ BEGIN
 
   IF @LogToTable = 'Y'
   BEGIN
-    INSERT INTO az_dba.CommandLog (DatabaseName, SchemaName, ObjectName, ObjectType, IndexName, IndexType, StatisticsName, PartitionNumber, ExtendedInfo, CommandType, Command, StartTime)
+    INSERT INTO sqldba.CommandLog (DatabaseName, SchemaName, ObjectName, ObjectType, IndexName, IndexType, StatisticsName, PartitionNumber, ExtendedInfo, CommandType, Command, StartTime)
     VALUES (@DatabaseName, @SchemaName, @ObjectName, @ObjectType, @IndexName, @IndexType, @StatisticsName, @PartitionNumber, @ExtendedInfo, @CommandType, @Command, @StartTime)
   END
 
@@ -252,7 +252,7 @@ BEGIN
 
   IF @LogToTable = 'Y'
   BEGIN
-    UPDATE az_dba.CommandLog
+    UPDATE sqldba.CommandLog
     SET EndTime = @EndTime,
         ErrorNumber = CASE WHEN @Execute = 'N' THEN NULL ELSE @Error END,
         ErrorMessage = @ErrorMessageOriginal
