@@ -4,7 +4,8 @@ BEGIN
 END
 
 CREATE TABLE [sqldba].[sql_maintenance_parameters] (
-	Server_Name NVARCHAR(max) NOT NULL
+	[ID] [int] IDENTITY(1,1) NOT NULL
+	,Server_Name NVARCHAR(max) NOT NULL
 	,Databases NVARCHAR(max) NOT NULL
 	,FragmentationLow NVARCHAR(max) DEFAULT NULL
 	,FragmentationMedium NVARCHAR(max) DEFAULT 'INDEX_REORGANIZE,INDEX_REBUILD_ONLINE,INDEX_REBUILD_OFFLINE'
@@ -38,6 +39,8 @@ CREATE TABLE [sqldba].[sql_maintenance_parameters] (
 	,DatabaseOrder NVARCHAR(max) DEFAULT NULL
 	,DatabasesInParallel NVARCHAR(max) DEFAULT 'N'
 	,LogToTable NVARCHAR(max) DEFAULT 'Y'
+	,Created datetime DEFAULT getdate()
+	,Comments NVARCHAR(max) NULL
 	)
 
 /*
