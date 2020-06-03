@@ -11,8 +11,8 @@ SELECT ISNULL(CAST([Server_Name] AS NVARCHAR(max)),'NULL') [Server_Name]
       ,CASE WHEN ISNULL(CAST([MinNumberOfPages] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@MinNumberOfPages = NULL,' ELSE '@MinNumberOfPages = '''+CAST(MinNumberOfPages AS NVARCHAR(max))+''',' END [MinNumberOfPages]
       ,CASE WHEN ISNULL(CAST([MaxNumberOfPages] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@MaxNumberOfPages = NULL,' ELSE '@MaxNumberOfPages = '''+CAST(MaxNumberOfPages AS NVARCHAR(max))+''',' END [MaxNumberOfPages]
       ,CASE WHEN ISNULL(CAST([SortInTempdb] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@SortInTempdb = NULL,' ELSE '@SortInTempdb = '''+SortInTempdb+''',' END [SortInTempdb]
-      ,CASE WHEN ISNULL(CAST([Max_DOP] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@Max_DOP = NULL,' ELSE '@Max_DOP = '''+CAST(Max_DOP AS NVARCHAR(max))+''',' END [Max_DOP]
-      ,CASE WHEN ISNULL(CAST([Fill_Factor] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@Fill_Factor = NULL,' ELSE '@Fill_Factor = '''+CAST(Fill_Factor AS NVARCHAR(max))+''',' END [Fill_Factor]
+      ,CASE WHEN ISNULL(CAST([Max_DOP] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@MaxDOP = NULL,' ELSE '@MaxDOP = '''+CAST(Max_DOP AS NVARCHAR(max))+''',' END [Max_DOP]
+      ,CASE WHEN ISNULL(CAST([Fill_Factor] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@FillFactor = NULL,' ELSE '@FillFactor = '''+CAST(Fill_Factor AS NVARCHAR(max))+''',' END [Fill_Factor]
       ,CASE WHEN ISNULL(CAST([PadIndex] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@PadIndex = NULL,' ELSE '@PadIndex = '''+PadIndex+''',' END [PadIndex]
       ,CASE WHEN ISNULL(CAST([LOBCompaction] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@LOBCompaction = NULL,' ELSE '@LOBCompaction = '''+LOBCompaction+''',' END [LOBCompaction]
       ,CASE WHEN ISNULL(CAST([UpdateStatistics] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@UpdateStatistics = NULL,' ELSE '@UpdateStatistics = '''+UpdateStatistics+''',' END [UpdateStatistics]
@@ -37,7 +37,6 @@ SELECT ISNULL(CAST([Server_Name] AS NVARCHAR(max)),'NULL') [Server_Name]
       ,CASE WHEN ISNULL(CAST([LogToTable] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@LogToTable = NULL,' ELSE '@LogToTable = '''+LogToTable+'''' END [LogToTable]
   FROM sqldba.sql_maintenance_parameters
   )
-SELECT	 Server_Name
-		,Databases
+SELECT	*
 		,'DECLARE @sql_db VARCHAR(max); SET @sql_db = ( SELECT DB_NAME(db_id())); EXECUTE [sqldba].[IndexOptimize]	@Databases = @sql_db,' + FragmentationLow + FragmentationMedium + FragmentationHigh + FragmentationLevel1 + FragmentationLevel2 + MinNumberOfPages + MaxNumberOfPages + SortInTempdb + Max_DOP + Fill_Factor + PadIndex + LOBCompaction + UpdateStatistics + OnlyModifiedStatistics + StatisticsModificationLevel + StatisticsSample + StatisticsResample + PartitionLevel + MSShippedObjects + Indexes + TimeLimit + DELAY + WaitAtLowPriorityMaxDuration + WaitAtLowPriorityAbortAfterWait + Resumable + AvailabilityGroups + LockTimeout + LockMessageSeverity + StringDelimiter + DatabaseOrder + DatabasesInParallel + LogToTable AS Script
 FROM data_con
