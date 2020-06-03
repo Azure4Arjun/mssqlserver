@@ -19,10 +19,10 @@ CREATE TABLE [sqldba].[sql_maintenance_parameters] (
 	,Fill_Factor INT DEFAULT NULL
 	,PadIndex NVARCHAR(max) DEFAULT NULL
 	,LOBCompaction NVARCHAR(max) DEFAULT 'Y'
-	,UpdateStatistics NVARCHAR(max) NULL
+	,UpdateStatistics NVARCHAR(max) DEFAULT 'ALL'
 	,OnlyModifiedStatistics NVARCHAR(max) DEFAULT 'N'
 	,StatisticsModificationLevel INT DEFAULT NULL
-	,StatisticsSample INT DEFAULT NULL
+	,StatisticsSample INT DEFAULT 100
 	,StatisticsResample NVARCHAR(max) DEFAULT 'N'
 	,PartitionLevel NVARCHAR(max) DEFAULT 'Y'
 	,MSShippedObjects NVARCHAR(max) DEFAULT 'N'
