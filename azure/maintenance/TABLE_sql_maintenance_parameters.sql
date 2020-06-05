@@ -38,6 +38,7 @@ CREATE TABLE [sqldba].[sql_maintenance_parameters] (
 	,StringDelimiter NVARCHAR(max) DEFAULT ','
 	,DatabaseOrder NVARCHAR(max) DEFAULT NULL
 	,DatabasesInParallel NVARCHAR(max) DEFAULT 'N'
+	,CommandLogCleanup INT DEFAULT 14
 	,LogToTable NVARCHAR(max) DEFAULT 'Y'
 	,Created datetime DEFAULT getdate()
 	,Comments NVARCHAR(max) NULL
