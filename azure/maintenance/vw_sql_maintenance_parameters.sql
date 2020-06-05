@@ -1,4 +1,4 @@
-CREATE VIEW [sqldba].vw_sql_maintenance_parameters
+CREATE VIEW [sqldba].[vw_sql_maintenance_parameters]
 AS 
 WITH data_con as (
 SELECT ISNULL(CAST([Server_Name] AS NVARCHAR(max)),'NULL') [Server_Name]
@@ -34,9 +34,11 @@ SELECT ISNULL(CAST([Server_Name] AS NVARCHAR(max)),'NULL') [Server_Name]
       ,CASE WHEN ISNULL(CAST([StringDelimiter] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@StringDelimiter = NULL,' ELSE '@StringDelimiter = '''+StringDelimiter+''',' END [StringDelimiter]
       ,CASE WHEN ISNULL(CAST([DatabaseOrder] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@DatabaseOrder = NULL,' ELSE '@DatabaseOrder = '''+DatabaseOrder+''',' END [DatabaseOrder]
       ,CASE WHEN ISNULL(CAST([DatabasesInParallel] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@DatabasesInParallel = NULL,' ELSE '@DatabasesInParallel = '''+DatabasesInParallel+''',' END [DatabasesInParallel]
-      ,CASE WHEN ISNULL(CAST([LogToTable] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@LogToTable = NULL,' ELSE '@LogToTable = '''+LogToTable+'''' END [LogToTable]
+      ,CASE WHEN ISNULL(CAST([CommandLogCleanup] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@CommandLogCleanup = NULL,' ELSE '@CommandLogCleanup = '''+CAST(CommandLogCleanup AS NVARCHAR(max))+''',' END [CommandLogCleanup]
+	  ,CASE WHEN ISNULL(CAST([LogToTable] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@LogToTable = NULL,' ELSE '@LogToTable = '''+LogToTable+'''' END [LogToTable]
   FROM sqldba.sql_maintenance_parameters
   )
 SELECT	*
-		,'DECLARE @sql_db VARCHAR(max); SET @sql_db = ( SELECT DB_NAME(db_id())); EXECUTE [sqldba].[IndexOptimize]	@Databases = @sql_db,' + FragmentationLow + FragmentationMedium + FragmentationHigh + FragmentationLevel1 + FragmentationLevel2 + MinNumberOfPages + MaxNumberOfPages + SortInTempdb + Max_DOP + Fill_Factor + PadIndex + LOBCompaction + UpdateStatistics + OnlyModifiedStatistics + StatisticsModificationLevel + StatisticsSample + StatisticsResample + PartitionLevel + MSShippedObjects + Indexes + TimeLimit + DELAY + WaitAtLowPriorityMaxDuration + WaitAtLowPriorityAbortAfterWait + Resumable + AvailabilityGroups + LockTimeout + LockMessageSeverity + StringDelimiter + DatabaseOrder + DatabasesInParallel + LogToTable AS Script
+		,'DECLARE @sql_db VARCHAR(max); SET @sql_db = ( SELECT DB_NAME(db_id())); EXECUTE [sqldba].[IndexOptimize]	@Databases = @sql_db,' + FragmentationLow + FragmentationMedium + FragmentationHigh + FragmentationLevel1 + FragmentationLevel2 + MinNumberOfPages + MaxNumberOfPages + SortInTempdb + Max_DOP + Fill_Factor + PadIndex + LOBCompaction + UpdateStatistics + OnlyModifiedStatistics + StatisticsModificationLevel + StatisticsSample + StatisticsResample + PartitionLevel + MSShippedObjects + Indexes + TimeLimit + DELAY + WaitAtLowPriorityMaxDuration + WaitAtLowPriorityAbortAfterWait + Resumable + AvailabilityGroups + LockTimeout + LockMessageSeverity + StringDelimiter + DatabaseOrder + DatabasesInParallel + CommandLogCleanup + LogToTable AS Script
 FROM data_con
+GO
