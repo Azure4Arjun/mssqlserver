@@ -19,5 +19,5 @@ EXEC master.dbo.sp_WhoIsActive @get_outer_command = 1
        [reads][writes][physical_reads][used_memory][percent_complete][request_id][login_time][tran_start_time][collection_time]'
        --,@sort_order = '[start_time] ASC'
        --,@sort_order = '[cpu] DESC'
-       ,@sort_order = '[blocked_session_count] DESC'
+       --,@sort_order = '[blocked_session_count] DESC'
 GO
