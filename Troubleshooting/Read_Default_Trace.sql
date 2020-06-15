@@ -5,7 +5,7 @@ DECLARE @full_path NVARCHAR(512)
 
 SELECT @full_path = path
 FROM sys.traces
-WHERE is_default = 1
+WHERE is_default = 1;
 
 SELECT @path = LEFT(@full_path, LEN(@full_path) - CHARINDEX('\', REVERSE(@full_path)) + 1)
 
