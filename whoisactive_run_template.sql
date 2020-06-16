@@ -18,6 +18,6 @@ EXEC master.dbo.sp_WhoIsActive @get_outer_command = 1
       [database_name][host_name][login_name][program_name][sql_text][sql_command][query_plan][locks][tempdb%]
        [reads][writes][physical_reads][used_memory][percent_complete][request_id][login_time][tran_start_time][collection_time]'
        --,@sort_order = '[start_time] ASC'
-       --,@sort_order = '[cpu] DESC'
+       ,@sort_order = '[cpu] DESC'
        --,@sort_order = '[blocked_session_count] DESC'
 GO

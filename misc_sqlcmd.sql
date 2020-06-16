@@ -69,11 +69,3 @@ SELECT SERVERPROPERTY('MachineName') MachineName
 	,SUBSTRING(cast(@@VERSION AS VARCHAR(max)), 1, CHARINDEX(CAST(SERVERPROPERTY('productversion') AS VARCHAR(max)), cast(@@VERSION AS VARCHAR(max)), 1) + len(CAST(SERVERPROPERTY('productversion') AS VARCHAR(max)))) Version
 WHERE SERVERPROPERTY('MachineName') ='';
 ------------------------------------------------------------------------
-
-	,CASE 
-		WHEN patindex(@Pattern_1 COLLATE Latin1_General_BIN, CAST([Description] AS VARCHAR(max))) > 0
-			THEN CAST(Stuff(REPLACE(REPLACE(REPLACE(REPLACE(cast([Description] as nvarchar(max)), CHAR(13), ' '), CHAR(10), ' '),'|~',''),'^^'+CHAR(13)+CHAR(10),' '), PatIndex(@Pattern_1, REPLACE(REPLACE(REPLACE(REPLACE(cast([Description] as nvarchar(max)), CHAR(13), ' '), CHAR(10), ' '),'|~',''),'^^'+CHAR(13)+CHAR(10),' ')	), 0, '') AS varchar(max))
-		ELSE CAST(REPLACE(REPLACE(REPLACE(REPLACE(cast([Description] as nvarchar(max)), CHAR(13), ' '), CHAR(10), ' '),'|~',''),'^^'+CHAR(13)+CHAR(10),' ')	AS varchar(max))
-		END [Description]
-		;
-```	
