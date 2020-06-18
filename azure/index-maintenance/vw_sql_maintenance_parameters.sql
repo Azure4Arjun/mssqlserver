@@ -1,7 +1,8 @@
 CREATE VIEW [sqldba].[vw_sql_maintenance_parameters]
 AS 
 WITH data_con as (
-SELECT ISNULL(CAST([Server_Name] AS NVARCHAR(max)),'NULL') [Server_Name]
+SELECT ISNULL(CAST([customer] AS NVARCHAR(max)),'NULL') [customer]
+,ISNULL(CAST([Server_Name] AS NVARCHAR(max)),'NULL') [Server_Name]
       ,ISNULL(CAST([Databases] AS NVARCHAR(max)),'NULL') [Databases]
       ,CASE WHEN ISNULL(CAST([FragmentationLow] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@FragmentationLow = NULL,' ELSE '@FragmentationLow = '''+FragmentationLow+''',' END [FragmentationLow]
       ,CASE WHEN ISNULL(CAST([FragmentationMedium] AS NVARCHAR(max)),'NULL') ='NULL' THEN '@FragmentationMedium = NULL,' ELSE '@FragmentationMedium = '''+FragmentationMedium+''',' END [FragmentationMedium]

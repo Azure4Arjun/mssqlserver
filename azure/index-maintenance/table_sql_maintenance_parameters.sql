@@ -5,6 +5,7 @@ END
 
 CREATE TABLE [sqldba].[sql_maintenance_parameters] (
 	[ID] [int] IDENTITY(1,1) NOT NULL
+	,customer NVARCHAR(max) NOT NULL
 	,Server_Name NVARCHAR(max) NOT NULL
 	,Databases NVARCHAR(max) NOT NULL
 	,FragmentationLow NVARCHAR(max) DEFAULT NULL
@@ -43,7 +44,6 @@ CREATE TABLE [sqldba].[sql_maintenance_parameters] (
 	,Created datetime DEFAULT getdate()
 	,Comments NVARCHAR(max) NULL
 	)
-
 /*
 
 INSERT INTO [sqldba].[sql_maintenance_parameters] (
