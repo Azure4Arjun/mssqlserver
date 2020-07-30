@@ -50,6 +50,7 @@ netsh advfirewall firewall set rule group="windows management instrumentation (w
 
 query session /server:SERVER_NAME
 reset session [ID] /server: SERVER_NAME
+for /f %i in (servers.txt) do query user *username* /server:%i  
 
 
 -- Cluster BP
