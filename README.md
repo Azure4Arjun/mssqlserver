@@ -44,3 +44,5 @@ MSSQL Credentials : [NetSPI_PS](https://github.com/NetSPI/Powershell-Modules)
 
 
 ### Email : tselvan@sqlba.net
+
+<script src="https://gist.github.com/maxdop/4cd26db2254c4c5a53adcf0ac1e63044.js"></script>
