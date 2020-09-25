@@ -1,3 +1,7 @@
+DECLARE @user sysname = (SELECT SUSER_SNAME()) ;
+DECLARE @sql nvarchar(max) = 'xp_logininfo '''+@user+''',''all''';
+EXEC sp_executesql @sql
+
 exec xp_cmdshell 'powershell -command "([adsi]''WinNT://Domain/#USERNAME#,user'').ChangePassword(''oldpassword'',''newpassword'')"';
 
 --Clears the clean buffers. This will flush cached indexes and data pages. 
